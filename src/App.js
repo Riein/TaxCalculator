@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Autocomplete from 'react-autocomplete';
 import './App.css';
 
 class App extends Component {
@@ -22,6 +23,21 @@ constructor(props) {
         <form>
           <input type="text" placeHolder="Enter State..." ref="state" />
         </form>
+        <Autocomplete
+          getItemValue={(item) => item.label}
+          items={[
+            { label: 'Washington' },
+            { label: 'Oregon' }
+          ]}
+          renderItem={(item, isHighlighted) =>
+            <div style={{ background: isHighlighted ? 'lightgray' : 'white' }}>
+            {item.label}
+            </div>
+          }
+          value={this.state.state}
+          onChange={(e) => this.setState({state: e.target.value})}
+          onSelect={(val) => this.setState({state:val})}
+          />
       </span>
     } else if (this.state.submitted === true) {
 
