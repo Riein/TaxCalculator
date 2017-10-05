@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "fake-request": "^0.2.1",
     "react": "^16.0.0",
     "react-autocomplete": "^1.7.1",
     "react-dom": "^16.0.0",
