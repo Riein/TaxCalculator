@@ -38,8 +38,6 @@ renderItems(items) {
 
     } else if (!this.state.value && this.state.submitted === false) {
       value = <span>
-        <h2>Please enter your state (Washington or Oregon)</h2>
-
 
       </span>
     } else if (this.state.submitted === true) {
@@ -54,40 +52,43 @@ renderItems(items) {
           This application will calculate how much income and sales tax you pay in Washington or Oregon.
         </p>
         <div className="text-center">
-
-          <label htmlFor="states-autocomplete">Choose a state from the US</label>
-          <Autocomplete
-          value={this.state.value}
-          inputProps={{ id: 'states-autocomplete' }}
-          wrapperStyle={{ position: 'relative', display: 'inline-block' }}
-          items={this.state.statesList}
-          getItemValue={(item) => item.name}
-          onSelect={(value, state) => this.setState({ value, statesList: [state] }) }
-          onChange={(event, value) => {
-            this.setState({ value, loading: true, statesList: [] })
-            clearTimeout(this.requestTimer)
-            this.requestTimer = fakeRequest(value, (items) => {
-              this.setState({ statesList: items, loading: false })
-            })
-          }}
-          renderItem={(item, isHighlighted) => (
-            <div
-              className={`item ${isHighlighted ? 'item-highlighted' : ''}`}
-              key={item.abbr}
-            >{item.name}</div>
-          )}
-          renderMenu={(items, value) => (
-            <div className="menu">
-              {value === '' ? (
-                <div className="item">Type of the name of a United State</div>
-              ) : this.state.loading ? (
-                <div className="item">Loading...</div>
-              ) : items.length === 0 ? (
-                <div className="item">No matches for {value}</div>
-              ) : this.renderItems(items)}
-            </div>
-          )}
-        />
+          <div className="item-center">
+            <label htmlFor="states-autocomplete">Choose a state from the US</label>
+          </div>
+          <div className="item-center">
+            <Autocomplete
+              value={this.state.value}
+              inputProps={{ id: 'states-autocomplete' }}
+              wrapperStyle={{ position: 'relative', display: 'inline-block' }}
+              items={this.state.statesList}
+              getItemValue={(item) => item.name}
+              onSelect={(value, state) => this.setState({ value, statesList: [state] }) }
+              onChange={(event, value) => {
+                this.setState({ value, loading: true, statesList: [] })
+                clearTimeout(this.requestTimer)
+                this.requestTimer = fakeRequest(value, (items) => {
+                  this.setState({ statesList: items, loading: false })
+                })
+              }}
+              renderItem={(item, isHighlighted) => (
+                <div
+                  className={`item ${isHighlighted ? 'item-highlighted' : ''}`}
+                  key={item.abbr}
+                  >{item.name}</div>
+                )}
+                renderMenu={(items, value) => (
+                  <div className="menu">
+                  {value === '' ? (
+                    <div className="item">Type of the name of a United State</div>
+                  ) : this.state.loading ? (
+                    <div className="item">Loading...</div>
+                  ) : items.length === 0 ? (
+                    <div className="item">No matches for {value}</div>
+                  ) : this.renderItems(items)}
+                  </div>
+                )}
+            />
+          </div>
         </div>
       </div>
     );
