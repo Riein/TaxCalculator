@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Search from './components/Search';
+import Income from './components/Income';
 import './App.css';
 
 
@@ -21,11 +22,12 @@ constructor(props) {
 
   render() {
     var value;
-    if (this.state.value && this.state.submitted === false) {
-
-    } else if (!this.state.value && this.state.submitted === false) {
+    if (this.state.stateValue && this.state.submitted === false) {
       value = <span>
-
+        <Income />
+      </span>
+    } else if (!this.state.stateValue && this.state.submitted === false) {
+      value = <span>
       </span>
     } else if (this.state.submitted === true) {
 
@@ -43,8 +45,8 @@ constructor(props) {
             <label htmlFor="states-autocomplete">Choose a state from the US</label>
           </div>
           <div className="item-center">
-            {value}
             <Search onChange={this.stateChange} />
+            {value}
           </div>
         </div>
       </div>
