@@ -8,14 +8,16 @@ constructor(props) {
   super(props);
   this.state = {
     id:'',
-    value:'',
-    statesList: [],
-    loading:false,
+    stateValue: '',
     submitted: false
   }
 
 }
 
+  stateChange = (newState) => {
+    console.log(newState);
+    this.setState({stateValue: newState});
+  }
 
   render() {
     var value;
@@ -41,7 +43,8 @@ constructor(props) {
             <label htmlFor="states-autocomplete">Choose a state from the US</label>
           </div>
           <div className="item-center">
-            <Search />
+            {value}
+            <Search onChange={this.stateChange} />
           </div>
         </div>
       </div>

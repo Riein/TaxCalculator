@@ -8,18 +8,14 @@ class Search extends Component {
 constructor(props) {
   super(props);
   this.state = {
-    id:'',
     value:'',
     statesList: [],
-    loading:false,
-    submitted: false
+    loading:false
   }
   this.requestTimer = null
-  this.renderItems = this.renderItems.bind(this)
-
 }
 
-renderItems(items) {
+renderItems = (items) => {
     return items.map((item, index) => {
       const text = item.props.children
       if (index === 0 || items[index - 1].props.children.charAt(0) !== text.charAt(0)) {
@@ -31,18 +27,15 @@ renderItems(items) {
     })
   }
 
+  onChange = (event) => {
+    console.log(event.target.value);
+    this.props.onChange(this.state.value);
+    this.setState({
+      value: event.target.value
+    });
+  }
 
   render() {
-    var value;
-    if (this.state.value && this.state.submitted === false) {
-
-    } else if (!this.state.value && this.state.submitted === false) {
-      value = <span>
-
-      </span>
-    } else if (this.state.submitted === true) {
-
-    }
     return (
       <div className="App text-center">
         <Autocomplete
@@ -51,7 +44,7 @@ renderItems(items) {
           wrapperStyle={{ position: 'relative', display: 'inline-block' }}
           items={this.state.statesList}
           getItemValue={(item) => item.name}
-          onSelect={(value, state) => this.setState({ value, statesList: [state] }) }
+          onSelect={(value, state) => this.setState({ value, statesList: [state] }, this.props.onChange(state.name)) }
           onChange={(event, value) => {
             this.setState({ value, loading: true, statesList: [] })
             clearTimeout(this.requestTimer)
