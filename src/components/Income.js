@@ -8,13 +8,18 @@ class Income extends Component {
     };
   }
 
+  handleChange = (e) => {
+    console.log(e.target.value);
+  }
+
   render() {
     return (
       <div className="range">
       <form>
         <label>
           Income:
-          <input type="text" name="income" placeholder="Enter your income..." />
+          <br />
+          <input type="text" name="income" placeholder="Enter your income..." onChange={this.handleChange} />
         </label>
         <input type="submit" value="Submit" />
       </form>

@@ -46,6 +46,7 @@ constructor(props) {
           </div>
           <div className="item-center">
             <Search onChange={this.stateChange} />
+            <br />
             {value}
           </div>
         </div>
