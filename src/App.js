@@ -10,6 +10,7 @@ constructor(props) {
   this.state = {
     id:'',
     stateValue: '',
+    currentIncome: '',
     submitted: false
   }
 
@@ -20,18 +21,25 @@ constructor(props) {
     this.setState({stateValue: newState});
   }
 
+  incomeChange = (newIncome) => {
+    console.log("The new income is " + newIncome);
+    this.setState({currentIncome: newIncome});
+  }
+
   render() {
     var value;
     if (this.state.stateValue && this.state.submitted === false) {
       value = <span>
-        <Income />
+        <Income value={this.state.currentIncome} onChange={this.incomeChange}/>
       </span>
     } else if (!this.state.stateValue && this.state.submitted === false) {
       value = <span>
       </span>
-    } else if (this.state.submitted === true) {
-
-    }
+    } /*else if (this.state.submitted === true) {
+      value = <span>
+        <Income value={this.state.currentIncome} onChange={this.incomeChange}/>
+      </span>
+    } */
     return (
       <div className="App text-center">
         <div className="App-header">
