@@ -1,31 +1,45 @@
 import React, { Component } from 'react';
+import Search from './components/Search';
+import Income from './components/Income';
 import './App.css';
+
 
 class App extends Component {
 constructor(props) {
   super(props);
   this.state = {
     id:'',
-    state:'',
+    stateValue: '',
+    currentIncome: '',
     submitted: false
   }
 
 }
 
+  stateChange = (newState) => {
+    console.log(newState);
+    this.setState({stateValue: newState});
+  }
+
+  incomeChange = (newIncome) => {
+    console.log("The new income is " + newIncome);
+    this.setState({currentIncome: newIncome});
+  }
+
   render() {
-    var state;
-    if (this.state.state && this.state.submitted === false) {
-
-    } else if (!this.state.state && this.state.submitted === false) {
-      state = <span>
-        <h2>Please enter your state (Washington or Oregon)</h2>
-        <form>
-          <input type="text" placeHolder="Enter State..." ref="state" />
-        </form>
+    var value;
+    if (this.state.stateValue && this.state.submitted === false) {
+      value = <span>
+        <Income value={this.state.currentIncome} onChange={this.incomeChange}/>
       </span>
-    } else if (this.state.submitted === true) {
-
-    }
+    } else if (!this.state.stateValue && this.state.submitted === false) {
+      value = <span>
+      </span>
+    } /*else if (this.state.submitted === true) {
+      value = <span>
+        <Income value={this.state.currentIncome} onChange={this.incomeChange}/>
+      </span>
+    } */
     return (
       <div className="App text-center">
         <div className="App-header">
@@ -35,7 +49,14 @@ constructor(props) {
           This application will calculate how much income and sales tax you pay in Washington or Oregon.
         </p>
         <div className="text-center">
-          {state}
+          <div className="item-center">
+            <label htmlFor="states-autocomplete">Choose a state from the US</label>
+          </div>
+          <div className="item-center">
+            <Search onChange={this.stateChange} />
+            <br />
+            {value}
+          </div>
         </div>
       </div>
     );
